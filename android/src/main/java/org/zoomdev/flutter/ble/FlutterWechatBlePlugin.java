@@ -374,7 +374,7 @@ public class FlutterWechatBlePlugin implements MethodCallHandler, BleListener {
     public synchronized void onCharacteristicRead(DeviceAdapter device, BluetoothGattCharacteristic characteristic, boolean success) {
         if (readListener != null) {
             if (success) {
-                readListener.success(HexUtil.encodeHex(characteristic.getValue()));
+                readListener.success(HexUtil.encodeHexStr(characteristic.getValue()));
             } else {
                 processError(SYSTEM_ERROR, "Read value failed", readListener);
             }
