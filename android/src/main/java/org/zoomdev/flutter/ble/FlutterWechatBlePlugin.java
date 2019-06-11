@@ -374,9 +374,12 @@ public class FlutterWechatBlePlugin implements MethodCallHandler, BleListener {
     public synchronized void onCharacteristicRead(DeviceAdapter device, BluetoothGattCharacteristic characteristic, boolean success) {
         if (readListener != null) {
             if (success) {
-                System.out.println("onCharacteristicRead encodeHex:"+HexUtil.encodeHex(characteristic.getValue()));
-                System.out.println("onCharacteristicRead encodeHexStr:"+HexUtil.encodeHexStr(characteristic.getValue()));
-                readListener.success(HexUtil.encodeHexStr(characteristic.getValue()));
+                Map map = new HashMap<String,Object>();
+                map.put("deviceId", device.getDeviceId());
+                map.put("serviceId", Utils.getUuidOfService(characteristic.getService()));
+                map.put("characteristicId", Utils.getUuidOfCharacteristic(characteristic));
+                map.put("value",HexUtil.encodeHexStr(characteristic.getValue()));
+                readListener.success(map);
             } else {
                 processError(SYSTEM_ERROR, "Read value failed", readListener);
             }
@@ -393,8 +396,6 @@ public class FlutterWechatBlePlugin implements MethodCallHandler, BleListener {
         map.put("serviceId", Utils.getUuidOfService(characteristic.getService()));
         map.put("characteristicId", Utils.getUuidOfCharacteristic(characteristic));
         map.put("value", HexUtil.encodeHexStr(characteristic.getValue()));
-        System.out.println("onCharacteristicChanged encodeHex:"+HexUtil.encodeHex(characteristic.getValue()));
-        System.out.println("onCharacteristicChanged encodeHexStr:"+HexUtil.encodeHexStr(characteristic.getValue()));
         channel.invokeMethod("valueUpdate", map);
     }
 
