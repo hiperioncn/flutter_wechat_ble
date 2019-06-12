@@ -408,7 +408,7 @@ return; \
         if(error){
             callback(@{@"code":SYSTEM_ERROR});
         }else{
-            callback(@{});
+            callback(@{@"deviceId":deviceId,@"serviceId":serviceId,@"characteristicId":characteristicId,@"value":[ FlutterWechatBlePlugin toString:c.value ]});
         }
         
         __adapter.readValueCallback = nil;
