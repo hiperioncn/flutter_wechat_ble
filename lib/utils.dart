@@ -18,7 +18,7 @@ class Utils {
     return result;
   }
 
-  /// convert string to hex bytes
+  /// convert hex string to hex bytes
   static List<int> decodeHex(String data) {
     int len = data.length;
     if ((len & 0x01) != 0) {
@@ -44,5 +44,26 @@ class Utils {
       buffer.write(data[i].toRadixString(16));
     }
     return buffer.toString();
+  }
+
+  /// convert bytes to int
+  /// add 2019-06-13 by hiperion
+  static int bytes2Int(List bytes) {
+    int result = bytes[0] & 0xFF;
+    result |= ((bytes[1] << 8) & 0xFF00);
+    result |= ((bytes[2] << 16) & 0xFF0000);
+    result |= ((bytes[3] << 24) & 0xFF000000);
+    return result;
+  }
+
+  /// convert int to bytes
+  /// add 2019-06-13 by hiperion
+  static List<int> int2Bytes(int i) {
+    var result = List<int>();
+    result[0] = (i & 0xFF);
+    result[1] = ((i >> 8) & 0xFF);
+    result[2] = ((i >> 16) & 0xFF);
+    result[3] = ((i >> 24) & 0xFF);
+    return result;
   }
 }

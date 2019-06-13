@@ -122,6 +122,30 @@ class BleValue {
     return _bytes;
   }
 
+  ///add 2019-06-13 by hiperion
+  String _valueString;
+  String get valueString {
+    if (_valueString == null) {
+      if (value == null) {
+        return null;
+      }
+      _valueString = String.fromCharCodes(Utils.decodeHex(value));
+    }
+    return _valueString;
+  }
+
+  ///add 2019-06-13 by hiperion
+  int _valueInt;
+  int get valueInt {
+    if (_valueInt == null) {
+      if (value == null) {
+        return null;
+      }
+      _valueInt = Utils.bytes2Int(Utils.decodeHex(value));
+    }
+    return _valueInt;
+  }
+
   @override
   String toString() {
     return value;
