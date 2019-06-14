@@ -347,7 +347,7 @@
     }
     //Add 2019-06-13
     if(_readValueCallback!=nil){
-        _readValueCallback(device,characteristic,nil)
+        _readValueCallback(peripheral,characteristic,nil);
     }
     
     NSLog(@"%@",characteristic.value);
