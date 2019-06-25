@@ -59,7 +59,7 @@ class Utils {
   /// convert int to bytes
   /// add 2019-06-13 by hiperion
   static List<int> int2Bytes(int i) {
-    var result = List<int>();
+    var result = List<int>(4);
     result[0] = (i & 0xFF);
     result[1] = ((i >> 8) & 0xFF);
     result[2] = ((i >> 16) & 0xFF);
