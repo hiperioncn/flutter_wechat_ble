@@ -40,8 +40,11 @@ class Utils {
   static String encodeHex(List<int> data) {
     int l = data.length;
     StringBuffer buffer = new StringBuffer();
-    for (int i = 0, j = 0; i < l; i++) {
-      buffer.write(data[i].toRadixString(16));
+    String sTemp;
+    for (int i = 0; i < l; i++) {
+      sTemp = data[i].toRadixString(16);
+      sTemp = sTemp.length == 2 ? sTemp : "0" + sTemp;
+      buffer.write(sTemp);
     }
     return buffer.toString();
   }
